@@ -24,14 +24,12 @@ class BloomFilter:
 
     def add(self, elem):
         serialized_elem = self.serializer(elem)
-        print(serialized_elem)
         for i in range(1, 1 + self.hash_count):
             digest = mmh3.hash(serialized_elem, i) % self.size
             self.bit_array[digest] = True
 
     def check(self, elem):
         serialized_elem = self.serializer(elem)
-        print(serialized_elem)
         for i in range(1, 1 + self.hash_count):
             digest = mmh3.hash(serialized_elem, i) % self.size
             if not self.bit_array[digest]: return False
